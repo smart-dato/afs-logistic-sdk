@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Http;
 class AfsLogistic
 {
     public function __construct(
-        public ?string $clientId = null, 
-        public ?string $orgunitId = null, 
+        public ?string $clientId = null,
+        public ?string $orgunitId = null,
         public ?string $authToken = null
     ) {}
 

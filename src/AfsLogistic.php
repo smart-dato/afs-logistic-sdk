@@ -6,7 +6,11 @@ use Illuminate\Support\Facades\Http;
 
 class AfsLogistic
 {
-    public function __construct(public string $clientId, public string $orgunitId, public string $authToken) {}
+    public function __construct(
+        public ?string $clientId = null, 
+        public ?string $orgunitId = null, 
+        public ?string $authToken = null
+    ) {}
 
     public function tracking(string $shipmentMatchingNumber)
     {

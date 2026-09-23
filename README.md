@@ -27,16 +27,22 @@ php artisan vendor:publish --tag="afs-logistic-sdk-config"
 ## Configuration
 
 ```dotenv
-AFS_LOGISTIC_TRACKING=https://shippingnet01.ondot.at/afs/dataservice/publicapi/v1/shipment/retrieve
+AFS_LOGISTIC_CLIENT_ID=your-client-id
+AFS_LOGISTIC_ORGUNIT_ID=your-orgunit-id
+AFS_LOGISTIC_AUTH_TOKEN=your-auth-token
 ```
 
-> **Set `AFS_LOGISTIC_TRACKING` explicitly.** The default in the published config contains a stray space (`…ondot.at /afs/…`), so requests fail if you rely on it.
-
-The config also defines `AFS_LOGISTIC_URI`, which the package does not currently use.
+Requests go to `{AFS_LOGISTIC_URI}/afs/dataservice/publicapi/v1/shipment/retrieve`, with `AFS_LOGISTIC_URI` defaulting to `https://shippingnet01.ondot.at`. Set `AFS_LOGISTIC_TRACKING` to override the full endpoint URL.
 
 ## Usage
 
-Construct the client with your AFS credentials:
+```php
+use SmartDato\AfsLogistic\Facades\AfsLogistic;
+
+$shipment = AfsLogistic::tracking('your-shipment-number');
+```
+
+Or pass the credentials explicitly; any you leave out fall back to the config:
 
 ```php
 use SmartDato\AfsLogistic\AfsLogistic;
@@ -51,8 +57,6 @@ $shipment = $afs->tracking('your-shipment-number');
 ```
 
 `tracking()` looks the shipment up by its matching number and returns the decoded JSON response. It requests the shipment's codes, status, number and pickup/delivery carrier IDs, plus each collo's codes, status, number, tracking number and tracking link.
-
-The credentials have no config fallback, so the `AfsLogistic` facade resolves a client without them — construct it directly as above.
 
 ## Testing
 

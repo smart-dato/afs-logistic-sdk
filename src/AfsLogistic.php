@@ -10,7 +10,11 @@ class AfsLogistic
         public ?string $clientId = null,
         public ?string $orgunitId = null,
         public ?string $authToken = null
-    ) {}
+    ) {
+        $this->clientId ??= config('afs-logistic-sdk.client_id');
+        $this->orgunitId ??= config('afs-logistic-sdk.orgunit_id');
+        $this->authToken ??= config('afs-logistic-sdk.auth_token');
+    }
 
     public function tracking(string $shipmentMatchingNumber)
     {
@@ -48,6 +52,5 @@ class AfsLogistic
                 ],
             ],
         ])->json();
-
     }
 }

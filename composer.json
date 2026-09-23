@@ -1,6 +1,6 @@
 {
     "name": "smart-dato/afs-logistic-sdk",
-    "description": "This is my package afs-logistic-sdk",
+    "description": "AFS Logistic shipment tracking SDK for Laravel",
     "keywords": [
         "SmartDato",
         "laravel",
